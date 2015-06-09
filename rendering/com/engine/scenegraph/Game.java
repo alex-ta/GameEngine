@@ -31,11 +31,13 @@ public abstract class Game
 		root.updateAll(delta);
 	}
 	
-	public void addChild(GameObject child){
+	public GameObject addChild(GameObject child){
 		root.addChild(child);
+		return root;
 	}
-	public void addComponent(GameComponent component){
+	public GameObject addComponent(GameComponent component){
 		root.addComponent(component);
+		return root;
 	}
 	public void setEngine(CoreEngine engine){
 		root.setEngine(engine);

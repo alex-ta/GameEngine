@@ -8,6 +8,7 @@ import com.engine.components.FreeMove;
 import com.engine.components.PointLight;
 import com.engine.components.SpotLight;
 import com.engine.core.*;
+import com.engine.obs.BoundingBox;
 import com.engine.rendering.objects.Attenuation;
 import com.engine.rendering.objects.Material;
 import com.engine.rendering.objects.Mesh;
@@ -19,6 +20,9 @@ import com.engine.shader.*;
 import com.math.Quaternion;
 import com.math.Vector2D;
 import com.math.Vector3D;
+
+import pcore.PhysicComponent;
+import pcore.PhysicObjects;
 
 public class TestGame extends Game
 {
@@ -85,8 +89,10 @@ public class TestGame extends Game
 		GameObject testMesh1 = new GameObject().addComponent(new MeshRenderer(mesh2, material));
 		GameObject testMesh2 = new GameObject().addComponent(new MeshRenderer(mesh2, material));
 		//GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
-		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
-		 
+		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material)).addComponent(new PhysicComponent(new Vector3D(0f,0f,0f),new Vector3D(0.8f,0.0f,0.0f)));
+		GameObject testMesh4 = new GameObject().addComponent(new MeshRenderer(tempMesh, material)).addComponent(new PhysicComponent(new Vector3D(10f,0f,0f),new Vector3D(-0.4f,0.0f,0.0f)));
+		
+		PhysicObjects o = new PhysicObjects();
 
 		testMesh1.getTransform().getPos().set(0, 2, 0);
 		testMesh1.getTransform().setRot(new Quaternion(new Vector3D(0,1,0), 0.4f));
@@ -100,12 +106,13 @@ public class TestGame extends Game
 
 		addChild(testMesh1);
 		addChild(testMesh3);
+		addChild(testMesh4);
 		
 		testMesh3.getTransform().getPos().set(5,5,5);
 		//testMesh3.getTransform().setRot(new Quaternion(new Vector3D(1,0,0),(float)Math.toRadians(-45)));
 		
 		addChild(new GameObject().addComponent(new MeshRenderer(new Mesh("monkey3.obj"),material)).addComponent(new LookAtComponent()));
-		
+		addChild(o);
 		
 		directionalLight.getTransform().setRot(new Quaternion(new Vector3D(1,0,0), (float)Math.toRadians(-45)));
 	}
