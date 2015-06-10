@@ -2,7 +2,7 @@ package com.engine.obs;
 
 import com.math.Vector3D;
 
-public class BoundingSphere {
+public class BoundingSphere extends IntersectObject {
 
 	private Vector3D point;
 	private float radius;
@@ -15,6 +15,7 @@ public class BoundingSphere {
 	}
 
 	public BoundingSphere(Vector3D point, float radius) {
+		super(Colider.SPHERE);
 		this.point = point;
 		this.radius = radius;
 	}
@@ -34,5 +35,4 @@ public class BoundingSphere {
 	public void setRadius(float radius) {
 		this.radius = radius;
 	}
-
 }

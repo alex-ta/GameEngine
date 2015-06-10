@@ -2,11 +2,12 @@ package com.engine.obs;
 
 import com.math.Vector3D;
 
-public class BoundingBox implements IntersectObject {
+public class BoundingBox extends IntersectObject {
 
 	private Vector3D minExtends, maxExtends;
 
 	public BoundingBox(Vector3D minExtend, Vector3D maxExtend) {
+		super(Colider.BOX);
 		this.minExtends = minExtend;
 		this.maxExtends = maxExtend;
 	}

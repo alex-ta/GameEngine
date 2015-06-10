@@ -19,7 +19,7 @@ public class PhysicObjects extends GameObject{
 	private void collision(){
 		for(int i =0; i< objs.size(); i++){
 			for(int j = i+1; j< objs.size(); j++){
-				IntersectData data = objs.get(i).getIntersect().intersects(objs.get(j).getIntersect());
+				IntersectData data = objs.get(i).intersects(objs.get(j));
 				if(data.isIntersect()){
 					objs.get(i).setVelocity(objs.get(i).getVelocity().mul(-1));
 					objs.get(j).setVelocity(objs.get(j).getVelocity().mul(-1));

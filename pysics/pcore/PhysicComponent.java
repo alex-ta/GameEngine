@@ -11,7 +11,6 @@ import com.math.Vector3D;
 public class PhysicComponent extends GameComponent{
 	private Vector3D position;
 	private Vector3D velocity;
-	private IntersectObject intersect;
 
 	public PhysicComponent(Vector3D position, Vector3D velocity) {
 		super();
@@ -56,13 +55,12 @@ public class PhysicComponent extends GameComponent{
 		
 	}
 
-	public BoundingBox getIntersect() {
+	public IntersectObject getIntersect() {
 		return new BoundingBox(position, new Vector3D(8f,8f,8f));
 	}
 
-	
-	//public IntersectData intersects(PhysicComponent obj) {
-	//	return obj.intersect.intersects(obj.getIntersect());
-	//}
+	public IntersectData intersects(PhysicComponent obj) {
+		return getIntersect().intersects(obj.getIntersect());
+	}
 
 }
