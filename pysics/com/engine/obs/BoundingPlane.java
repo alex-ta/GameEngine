@@ -19,7 +19,7 @@ public class BoundingPlane {
 
 	public IntersectData intersects(BoundingSphere other) {
 		float distance = (float) Math
-				.abs((normal.dot(other.getPoint()) + this.distance))
+				.abs((normal.dot(other.getPosition()) + this.distance))
 				- other.getRadius();
 		return new IntersectData(distance < 0, distance);
 	}

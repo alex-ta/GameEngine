@@ -1,6 +1,7 @@
 package pcore;
 
 import com.engine.obs.BoundingBox;
+import com.engine.obs.Colider;
 import com.engine.obs.IntersectData;
 import com.engine.obs.IntersectObject;
 import com.engine.rendering.objects.RenderingEngine;
@@ -11,12 +12,14 @@ import com.math.Vector3D;
 public class PhysicComponent extends GameComponent{
 	private Vector3D position;
 	private Vector3D velocity;
+	private IntersectObject intersects;
 
-	public PhysicComponent(Vector3D position, Vector3D velocity) {
+	public PhysicComponent(Vector3D position, Vector3D velocity,IntersectObject insect) {
 		super();
 		PhysicObjects.addObject(this);
 		this.setPosition(position);
 		this.velocity = velocity;
+		this.intersects = insect;
 	}
 
 	public Vector3D getPosition() {
@@ -47,6 +50,7 @@ public class PhysicComponent extends GameComponent{
 	@Override
 	public void update(float delta) {
 		this.getTransform().setPos(this.getPosition());
+		intersects.update(position);
 	}
 
 	@Override
@@ -56,11 +60,18 @@ public class PhysicComponent extends GameComponent{
 	}
 
 	public IntersectObject getIntersect() {
-		return new BoundingBox(position, new Vector3D(8f,8f,8f));
+		return intersects;
 	}
 
 	public IntersectData intersects(PhysicComponent obj) {
 		return getIntersect().intersects(obj.getIntersect());
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		super.finalize();
+		PhysicObjects.removeObject(this);
+	}
+	
 
 }

@@ -34,6 +34,13 @@ public class BoundingBox extends IntersectObject {
 	public Vector3D getMaxExtends() {
 		return maxExtends;
 	}
+	
+	// fix current seems not right (cause maxExtends not movind)
+	@Override
+	public void update(Vector3D position){
+		super.update(position);
+		setMinExtends(position);
+	}
 
 	public void setMaxExtends(Vector3D maxExtends) {
 		this.maxExtends = maxExtends;

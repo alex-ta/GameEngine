@@ -42,5 +42,9 @@ public class PhysicObjects extends GameObject{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public static void removeObject(PhysicComponent physicComponent) {
+		objs.remove(physicComponent);
+	}
 	
 }

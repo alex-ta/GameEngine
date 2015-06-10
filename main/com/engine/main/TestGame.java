@@ -89,8 +89,8 @@ public class TestGame extends Game
 		GameObject testMesh1 = new GameObject().addComponent(new MeshRenderer(mesh2, material));
 		GameObject testMesh2 = new GameObject().addComponent(new MeshRenderer(mesh2, material));
 		//GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
-		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material)).addComponent(new PhysicComponent(new Vector3D(0f,0f,0f),new Vector3D(0.8f,0.0f,0.0f)));
-		GameObject testMesh4 = new GameObject().addComponent(new MeshRenderer(tempMesh, material)).addComponent(new PhysicComponent(new Vector3D(10f,0f,0f),new Vector3D(-0.4f,0.0f,0.0f)));
+		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material)).addComponent(new PhysicComponent(new Vector3D(0f,0f,0f),new Vector3D(0.8f,0.0f,0.0f),new BoundingBox(new Vector3D(0f,0f,0f),new Vector3D(8f,8f,8f))));
+		GameObject testMesh4 = new GameObject().addComponent(new MeshRenderer(tempMesh, material)).addComponent(new PhysicComponent(new Vector3D(10f,0f,0f),new Vector3D(-0.4f,0.0f,0.0f),new BoundingBox(new Vector3D(0f,0f,0f),new Vector3D(8f,8f,8f))));
 		
 		PhysicObjects o = new PhysicObjects();
 

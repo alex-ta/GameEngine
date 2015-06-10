@@ -5,6 +5,7 @@ import com.math.Vector3D;
 public abstract class IntersectObject {
 
 	private Colider type;
+	private Vector3D position;
 	
 	public IntersectData intersects(IntersectObject other){
 		switch(this.type){
@@ -74,4 +75,15 @@ public abstract class IntersectObject {
 		this.type = type;
 	}
 
+	public Vector3D getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vector3D position) {
+		this.position = position;
+	}
+
+	public void update(Vector3D position){
+		this.setPosition(position);
+	}
 }
