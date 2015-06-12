@@ -2,48 +2,51 @@ package com.engine.obs;
 
 import com.math.Vector3D;
 
-public class BoundingBox extends IntersectObject {
-
-	private Vector3D minExtends, maxExtends;
-
-	public BoundingBox(Vector3D minExtend, Vector3D maxExtend) {
-		super(Colider.BOX);
-		this.minExtends = minExtend;
-		this.maxExtends = maxExtend;
+public class BoundingBox extends Colider {
+	
+	private Vector3D halfSizePos;
+	private Vector3D halfSizeMin;
+	
+	public BoundingBox(Vector3D position, Vector3D size) {
+		super(position,size,Colider.RECT);
+		halfSizePos = size.div(2);
+		halfSizeMin = halfSizePos.mul(-1);
 	}
 
-	public IntersectData intersects(BoundingBox other) {
-		Vector3D distance1 = other.getMinExtends().sub(this.getMaxExtends());
-		Vector3D distance2 = this.getMinExtends().sub(other.getMaxExtends());
-		Vector3D distance = distance1.max(distance2);
-
-		float maxDistance = distance.max();
-
-		return new IntersectData(maxDistance < 0, maxDistance);
-
+	public Vector3D getHalfSizePos() {
+		return halfSizePos;
 	}
 
-	public Vector3D getMinExtends() {
-		return minExtends;
+	public void setHalfSizePos(Vector3D halfSizePos) {
+		this.halfSizePos = halfSizePos;
 	}
 
-	public void setMinExtends(Vector3D minExtends) {
-		this.minExtends = minExtends;
+	public Vector3D getHalfSizeMin() {
+		return halfSizeMin;
 	}
 
-	public Vector3D getMaxExtends() {
-		return maxExtends;
+	public void setHalfSizeMin(Vector3D halfSizeMin) {
+		this.halfSizeMin = halfSizeMin;
+	}
+
+	@Override
+	public IntersectData intersect(BoundingPlane other) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IntersectData intersect(BoundingSphere other) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	// fix current seems not right (cause maxExtends not movind)
-	@Override
-	public void update(Vector3D position){
-		super.update(position);
-		setMinExtends(position);
-	}
-
-	public void setMaxExtends(Vector3D maxExtends) {
-		this.maxExtends = maxExtends;
+	public IntersectData intersect(BoundingBox other) {
+		// does it work ?
+		Vector3D colidePos = other.getPosition().add(other.getHalfSizePos()).sub(this.getHalfSizeMin());
+		Vector3D colideMin = other.getPosition().add(other.getHalfSizeMin()).sub(this.getHalfSizePos());	
+		IntersectData sect = new IntersectData(colidePos.greater(0)&&colideMin.less(0), getPosition().sub(other.getPosition()));
+		return sect;
 	}
 
 }

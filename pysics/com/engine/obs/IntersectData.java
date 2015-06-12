@@ -1,14 +1,16 @@
 package com.engine.obs;
 
+import com.math.Vector3D;
+
 public class IntersectData {
 
-	public IntersectData(boolean isIntersect, float distance) {
+	public IntersectData(boolean isIntersect, Vector3D distance) {
 		this.isIntersect = isIntersect;
 		this.distance = distance;
 	}
 
 	private boolean isIntersect;
-	private float distance;
+	private Vector3D distance;
 
 	public boolean isIntersect() {
 		return isIntersect;
@@ -18,11 +20,11 @@ public class IntersectData {
 		this.isIntersect = isIntersect;
 	}
 
-	public float getDistance() {
+	public Vector3D getDistance() {
 		return distance;
 	}
 
-	public void setDistance(float distance) {
+	public void setDistance(Vector3D distance) {
 		this.distance = distance;
 	}
 

@@ -8,6 +8,7 @@ import com.engine.rendering.objects.RenderingEngine;
 import com.engine.scenegraph.GameComponent;
 import com.engine.scenegraph.GameObject;
 import com.engine.shader.Shader;
+import com.math.Vector3D;
 
 public class PhysicObjects extends GameObject{
 	private static ArrayList<PhysicComponent> objs = new ArrayList<PhysicComponent>();
@@ -20,9 +21,12 @@ public class PhysicObjects extends GameObject{
 		for(int i =0; i< objs.size(); i++){
 			for(int j = i+1; j< objs.size(); j++){
 				IntersectData data = objs.get(i).intersects(objs.get(j));
+				// does not work propably
 				if(data.isIntersect()){
-					objs.get(i).setVelocity(objs.get(i).getVelocity().mul(-1));
-					objs.get(j).setVelocity(objs.get(j).getVelocity().mul(-1));
+					Vector3D direction = data.getDistance().normalized();
+					Vector3D oDirection = direction.reflect(objs.get(i).getVelocity());
+					objs.get(i).setVelocity(objs.get(i).getVelocity().reflect(direction));
+					objs.get(j).setVelocity(objs.get(j).getVelocity().reflect(oDirection));
 				}
 			}
 		}

@@ -1,9 +1,7 @@
 package pcore;
 
-import com.engine.obs.BoundingBox;
 import com.engine.obs.Colider;
 import com.engine.obs.IntersectData;
-import com.engine.obs.IntersectObject;
 import com.engine.rendering.objects.RenderingEngine;
 import com.engine.scenegraph.GameComponent;
 import com.engine.shader.Shader;
@@ -12,9 +10,9 @@ import com.math.Vector3D;
 public class PhysicComponent extends GameComponent{
 	private Vector3D position;
 	private Vector3D velocity;
-	private IntersectObject intersects;
+	private Colider intersects;
 
-	public PhysicComponent(Vector3D position, Vector3D velocity,IntersectObject insect) {
+	public PhysicComponent(Vector3D position, Vector3D velocity,Colider insect) {
 		super();
 		PhysicObjects.addObject(this);
 		this.setPosition(position);
@@ -59,7 +57,7 @@ public class PhysicComponent extends GameComponent{
 		
 	}
 
-	public IntersectObject getIntersect() {
+	public Colider getIntersect() {
 		return intersects;
 	}
 

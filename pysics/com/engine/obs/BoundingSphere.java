@@ -2,28 +2,29 @@ package com.engine.obs;
 
 import com.math.Vector3D;
 
-public class BoundingSphere extends IntersectObject {
+public class BoundingSphere extends Colider {
 
-	private float radius;
-
-	public IntersectData intersects(BoundingSphere other) {
-		float radDist = this.getRadius() + other.getRadius();
-		float centerDist = other.getPosition().sub(this.getPosition()).length();
-		float distance = centerDist - radDist;
-		return new IntersectData(centerDist < radDist, distance);
+	public BoundingSphere(Vector3D position, Vector3D size) {
+		super(position, size, Colider.SPHERE);
+		// TODO Auto-generated constructor stub
 	}
 
-	public BoundingSphere(Vector3D point, float radius) {
-		super(Colider.SPHERE);
-		this.setPosition(point);
-		this.radius = radius;
+	@Override
+	public IntersectData intersect(BoundingBox other) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public float getRadius() {
-		return radius;
+	@Override
+	public IntersectData intersect(BoundingPlane other) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void setRadius(float radius) {
-		this.radius = radius;
+	@Override
+	public IntersectData intersect(BoundingSphere other) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }

@@ -27,25 +27,25 @@ public class Main
 //		IntersectData s2d = s1.intersects(s3);
 //		IntersectData s3d = s1.intersects(s4);
 //				
-//		BoundingBox b1 = new BoundingBox(new Vector3D(0f,0f,0f),new Vector3D(1f,1f,1f));
-//		BoundingBox b2 = new BoundingBox(new Vector3D(1f,1f,1f),new Vector3D(2f,2f,2f));
-//		BoundingBox b3 = new BoundingBox(new Vector3D(1f,0f,0f),new Vector3D(2f,1f,1f));
-//		BoundingBox b4 = new BoundingBox(new Vector3D(0f,0f,-2f),new Vector3D(1f,1f,-1f));
-//		BoundingBox b5 = new BoundingBox(new Vector3D(0f,0.5f,0f),new Vector3D(1f,1.5f,1f));
-//		
-//		
-//		
-//		IntersectData s1d = b1.intersects(b2);
-//		IntersectData s2d = b1.intersects(b3);
-//		IntersectData s3d = b1.intersects(b4);
-//		IntersectData s4d = b1.intersects(b5);
-//		
-//		System.out.println(s1d+"\r\n"+s2d+"\r\n"+s3d+"\r\n"+s4d);
-//		
-		TestGame game = new TestGame();
-		CoreEngine engine = new CoreEngine(800, 600, 60, game);
-		engine.createWindow("3D Game Engine");
-		engine.start();
+		BoundingBox b1 = new BoundingBox(new Vector3D(0f,0f,0f),new Vector3D(1f,1f,1f));
+		BoundingBox b2 = new BoundingBox(new Vector3D(1f,1f,1f),new Vector3D(2f,2f,2f));
+		BoundingBox b3 = new BoundingBox(new Vector3D(1f,0f,0f),new Vector3D(2f,1f,1f));
+		BoundingBox b4 = new BoundingBox(new Vector3D(0f,0f,-2f),new Vector3D(1f,1f,-1f));
+		BoundingBox b5 = new BoundingBox(new Vector3D(0f,0.5f,0f),new Vector3D(1f,1.5f,1f));
+		
+		
+		
+		IntersectData s1d = b1.intersects(b2);
+		IntersectData s2d = b1.intersects(b3);
+		IntersectData s3d = b1.intersects(b4);
+		IntersectData s4d = b1.intersects(b5);
+		
+		System.out.println(s1d+"\r\n"+s2d+"\r\n"+s3d+"\r\n"+s4d);
+		
+//		TestGame game = new TestGame();
+//		CoreEngine engine = new CoreEngine(800, 600, 60, game);
+//		engine.createWindow("3D Game Engine");
+//		engine.start();
 		
 		
 	}

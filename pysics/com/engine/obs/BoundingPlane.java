@@ -2,42 +2,29 @@ package com.engine.obs;
 
 import com.math.Vector3D;
 
-public class BoundingPlane {
+public class BoundingPlane extends Colider{
 
-	private Vector3D normal;
-	private float distance;
-
-	public BoundingPlane(Vector3D normal, float distance) {
-		this.normal = normal;
-		this.distance = distance;
+	public BoundingPlane(Vector3D position, Vector3D size) {
+		super(position, size, Colider.PLANE);
 	}
 
-	public BoundingPlane normalized() {
-		float magnitude = normal.length();
-		return new BoundingPlane(normal.div(magnitude), distance / magnitude);
+
+	@Override
+	public IntersectData intersect(BoundingBox other) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public IntersectData intersects(BoundingSphere other) {
-		float distance = (float) Math
-				.abs((normal.dot(other.getPosition()) + this.distance))
-				- other.getRadius();
-		return new IntersectData(distance < 0, distance);
+	@Override
+	public IntersectData intersect(BoundingPlane other) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public Vector3D getNormal() {
-		return normal;
-	}
-
-	public void setNormal(Vector3D normal) {
-		this.normal = normal;
-	}
-
-	public float getDistance() {
-		return distance;
-	}
-
-	public void setDistance(float distance) {
-		this.distance = distance;
+	@Override
+	public IntersectData intersect(BoundingSphere other) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
