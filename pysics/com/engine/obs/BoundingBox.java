@@ -4,11 +4,9 @@ import com.math.Vector3D;
 
 public class BoundingBox extends Colider {
 	
-	private Vector3D positionInvert;
 	
 	public BoundingBox(Vector3D position, Vector3D size) {
 		super(position,size,Colider.RECT);
-		positionInvert = getSize().mul(-1);
 	}
 
 	@Override

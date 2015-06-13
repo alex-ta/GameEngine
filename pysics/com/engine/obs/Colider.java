@@ -1,5 +1,6 @@
 package com.engine.obs;
 
+import com.math.Transform;
 import com.math.Vector3D;
 
 public abstract class Colider {
@@ -12,7 +13,7 @@ public abstract class Colider {
 	private Vector3D size;
 	private int type;
 	
-	public Colider (Vector3D position,Vector3D size, int type){
+	protected Colider (Vector3D position,Vector3D size, int type){
 		this.position = position;
 		this.size = size;
 		this.type = type;
@@ -31,17 +32,19 @@ public abstract class Colider {
 			throw new NumberFormatException(type+" not supported");
 		}
 	}
-
-	public void update(Vector3D position){
-		this.setPosition(position);
+	
+	public static Colider createInstance(Vector3D position,Vector3D size, int type){
+		switch(type){
+		case RECT: return new BoundingBox(position,size);
+		case SPHERE: return new BoundingSphere(position,size);
+		case PLANE: return new BoundingPlane(position,size);
+		default:
+			throw new NumberFormatException(type+" not supported");
+		}
 	}
 	
 	public Vector3D getPosition() {
 		return position;
-	}
-
-	public void setPosition(Vector3D position) {
-		this.position = position;
 	}
 
 	public Vector3D getSize() {

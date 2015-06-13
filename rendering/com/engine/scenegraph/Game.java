@@ -1,5 +1,4 @@
 package com.engine.scenegraph;
-
 import com.engine.core.CoreEngine;
 import com.engine.rendering.objects.*;
 
@@ -11,7 +10,6 @@ public abstract class Game
 	public Game(){
 		material = new Material();
 		root = new GameObject();
-		
 		material.addFloat("specularIntensity", 1f);
 		material.addFloat("specularPower", 8f);
 	}

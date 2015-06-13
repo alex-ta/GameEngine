@@ -1,31 +1,30 @@
 package pcore;
-
 import com.engine.obs.Colider;
 import com.engine.obs.IntersectData;
 import com.engine.rendering.objects.RenderingEngine;
 import com.engine.scenegraph.GameComponent;
+import com.engine.scenegraph.GameObject;
 import com.engine.shader.Shader;
 import com.math.Vector3D;
 
 public class PhysicComponent extends GameComponent{
-	private Vector3D position;
+	private GameObject wrapped;
 	private Vector3D velocity;
 	private Colider intersects;
 
-	public PhysicComponent(Vector3D position, Vector3D velocity,Colider insect) {
+	public PhysicComponent(GameObject wrapped, Vector3D velocity, Vector3D size, int type) {
 		super();
-		PhysicObjects.addObject(this);
-		this.setPosition(position);
+		this.setWrapped(wrapped);
 		this.velocity = velocity;
-		this.intersects = insect;
+		this.intersects = Colider.createInstance(wrapped.getTransform().getPos(), size, type);
 	}
 
-	public Vector3D getPosition() {
-		return position;
+	public GameObject getWrapped() {
+		return wrapped;
 	}
 
-	public void setPosition(Vector3D position) {
-		this.position = position;
+	public void setWrapped(GameObject wrapped) {
+		this.wrapped = wrapped;
 	}
 
 	public Vector3D getVelocity() {
@@ -37,24 +36,23 @@ public class PhysicComponent extends GameComponent{
 	}
 
 	public void integrate(float delta) {
-		position = this.position.add(this.velocity.mul(delta));
+		
 	}
 	
 	@Override
 	public void input(float delta) {
-		this.integrate(delta);
+		// Add velocity to Transform
+		wrapped.getTransform().setPos(wrapped.getTransform().getPos().add(this.velocity.mul(delta)));
 	}
 
 	@Override
 	public void update(float delta) {
-		this.getTransform().setPos(this.getPosition());
-		intersects.update(position);
+		// TODO
 	}
 
 	@Override
 	public void render(Shader shader, RenderingEngine engine) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public Colider getIntersect() {
@@ -65,16 +63,10 @@ public class PhysicComponent extends GameComponent{
 		return getIntersect().intersects(obj.getIntersect());
 	}
 	
-	public GameObject wrappObject(GameObject obj){
-		// TODO
-		
-	}
-	
-
 	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
-		PhysicObjects.removeObject(this);
+		PhysicEngine.removeObject(this);
 	}
 	
 
