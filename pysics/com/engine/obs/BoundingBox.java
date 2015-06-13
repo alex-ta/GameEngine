@@ -4,29 +4,11 @@ import com.math.Vector3D;
 
 public class BoundingBox extends Colider {
 	
-	private Vector3D halfSizePos;
-	private Vector3D halfSizeMin;
+	private Vector3D positionInvert;
 	
 	public BoundingBox(Vector3D position, Vector3D size) {
 		super(position,size,Colider.RECT);
-		halfSizePos = size.div(2);
-		halfSizeMin = halfSizePos.mul(-1);
-	}
-
-	public Vector3D getHalfSizePos() {
-		return halfSizePos;
-	}
-
-	public void setHalfSizePos(Vector3D halfSizePos) {
-		this.halfSizePos = halfSizePos;
-	}
-
-	public Vector3D getHalfSizeMin() {
-		return halfSizeMin;
-	}
-
-	public void setHalfSizeMin(Vector3D halfSizeMin) {
-		this.halfSizeMin = halfSizeMin;
+		positionInvert = getSize().mul(-1);
 	}
 
 	@Override
@@ -42,10 +24,13 @@ public class BoundingBox extends Colider {
 	}
 	
 	public IntersectData intersect(BoundingBox other) {
-		// does it work ?
-		Vector3D colidePos = other.getPosition().add(other.getHalfSizePos()).sub(this.getHalfSizeMin());
-		Vector3D colideMin = other.getPosition().add(other.getHalfSizeMin()).sub(this.getHalfSizePos());	
-		IntersectData sect = new IntersectData(colidePos.greater(0)&&colideMin.less(0), getPosition().sub(other.getPosition()));
+		// getting the center distance positiv
+		Vector3D centerDistance = other.getPosition().sub(this.getPosition()).abs();
+		// adding the hull 
+		Vector3D bounding = other.getSize().add(this.getSize());
+		// checking distance
+		Vector3D distance = centerDistance.sub(bounding);
+		IntersectData sect = new IntersectData(distance.less(0),distance);
 		return sect;
 	}
 

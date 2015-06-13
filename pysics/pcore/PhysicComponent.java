@@ -64,6 +64,12 @@ public class PhysicComponent extends GameComponent{
 	public IntersectData intersects(PhysicComponent obj) {
 		return getIntersect().intersects(obj.getIntersect());
 	}
+	
+	public GameObject wrappObject(GameObject obj){
+		// TODO
+		
+	}
+	
 
 	@Override
 	protected void finalize() throws Throwable {

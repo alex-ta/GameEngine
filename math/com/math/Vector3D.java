@@ -186,11 +186,11 @@ public class Vector3D
 	}
 	
 	public boolean less(float r){
-		return x<r&&y<r&&z<r;	
+		return x<r||y<r||z<r;	
 	}
 	
 	public boolean less(Vector3D r){
-		return x<r.x&&y<r.y&&z<r.z;	
+		return x<r.x||y<r.y||z<r.z;	
 	}
 
 	public Vector3D reflect(Vector3D normal) {
