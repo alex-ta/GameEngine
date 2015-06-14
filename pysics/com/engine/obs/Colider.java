@@ -1,6 +1,5 @@
 package com.engine.obs;
 
-import com.math.Transform;
 import com.math.Vector3D;
 
 public abstract class Colider {
@@ -45,6 +44,10 @@ public abstract class Colider {
 	
 	public Vector3D getPosition() {
 		return position;
+	}
+	
+	public void setPosition(Vector3D position){
+		this.position = position;
 	}
 
 	public Vector3D getSize() {

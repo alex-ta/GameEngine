@@ -97,12 +97,13 @@ public class TestGame extends Game
 		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
 		GameObject testMesh4 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
 		
+		physic.wrappObject(testMesh3, new Vector3D(-1f,0f,0f), new Vector3D(1f,1f,1f), Colider.RECT);
+		physic.wrappObject(testMesh4, new Vector3D(1f,0f,0f), new Vector3D(1f,1f,1f), Colider.RECT);
+		
 		// set POS does not update bounding
 		testMesh3.getTransform().setPos(new Vector3D(15,0,0));
 		testMesh4.getTransform().setPos(new Vector3D(5,0,0));
 		
-		physic.wrappObject(testMesh3, new Vector3D(-1f,0f,0f), new Vector3D(1f,1f,1f), Colider.RECT);
-		physic.wrappObject(testMesh4, new Vector3D(0f,0f,0f), new Vector3D(1f,1f,1f), Colider.RECT);
 		
 		
 		testMesh1.getTransform().getPos().set(0, 2, 0);

@@ -34,29 +34,26 @@ public class PhysicComponent extends GameComponent{
 	public void setVelocity(Vector3D velocity) {
 		this.velocity = velocity;
 	}
-
-	public void integrate(float delta) {
-		
+	
+	public Colider getIntersect() {
+		return intersects;
 	}
 	
 	@Override
 	public void input(float delta) {
-		// Add velocity to Transform
-		wrapped.getTransform().setPos(wrapped.getTransform().getPos().add(this.velocity.mul(delta)));
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void update(float delta) {
-		// TODO
+		Vector3D newPos = wrapped.getTransform().getPos().add(this.velocity.mul(delta));
+		wrapped.getTransform().setPos(newPos);
+		intersects.setPosition(newPos);
 	}
 
 	@Override
 	public void render(Shader shader, RenderingEngine engine) {
 		// TODO Auto-generated method stub
-	}
-
-	public Colider getIntersect() {
-		return intersects;
 	}
 
 	public IntersectData intersects(PhysicComponent obj) {
