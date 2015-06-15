@@ -1,4 +1,5 @@
 package com.engine.main;
+import com.effect.Reflect;
 import com.engine.components.Camera;
 import com.engine.components.DirectionalLight;
 import com.engine.components.FreeLook;
@@ -8,21 +9,16 @@ import com.engine.components.FreeMove;
 import com.engine.components.PointLight;
 import com.engine.components.SpotLight;
 import com.engine.core.*;
-import com.engine.obs.BoundingBox;
 import com.engine.obs.Colider;
 import com.engine.rendering.objects.Attenuation;
-import com.engine.rendering.objects.Material;
 import com.engine.rendering.objects.Mesh;
 import com.engine.rendering.objects.Texture;
 import com.engine.rendering.objects.Vertex;
 import com.engine.scenegraph.Game;
 import com.engine.scenegraph.GameObject;
-import com.engine.shader.*;
 import com.math.Quaternion;
 import com.math.Vector2D;
 import com.math.Vector3D;
-
-import pcore.PhysicComponent;
 import pcore.PhysicEngine;
 
 public class TestGame extends Game
@@ -97,8 +93,9 @@ public class TestGame extends Game
 		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
 		GameObject testMesh4 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
 		
-		physic.wrappObject(testMesh3, new Vector3D(-1f,0f,0f), new Vector3D(1f,1f,1f), Colider.SPHERE);
-		physic.wrappObject(testMesh4, new Vector3D(1f,0f,0f), new Vector3D(1f,1f,1f), Colider.BOX);
+		physic.wrappObject(testMesh3, new Vector3D(-1f,0f,0f), new Vector3D(1f,1f,1f), Colider.SPHERE).addEffect(new Reflect());
+		physic.wrappObject(testMesh4, new Vector3D(1f,0f,0f), new Vector3D(1f,1f,1f), Colider.BOX,2).addEffect(new Reflect());
+
 		
 		// set POS does not update bounding
 		testMesh3.getTransform().setPos(new Vector3D(15,0,0));

@@ -16,10 +16,14 @@ public class PhysicEngine extends GameObject{
 		objs.remove(physicComponent);
 	}
 	
-	public GameObject wrappObject(GameObject obj,Vector3D speed,Vector3D size,int type){
-		PhysicComponent component = new PhysicComponent(obj,speed,size,type);
+	public PhysicComponent wrappObject(GameObject obj,Vector3D speed,Vector3D size,int type,int weight){
+		PhysicComponent component = new PhysicComponent(obj,speed,size,type,weight);
 		this.addComponent(component);
-		return obj;
+		return component;
+	}
+	
+	public PhysicComponent wrappObject(GameObject obj,Vector3D speed,Vector3D size,int type){
+		return this.wrappObject(obj, speed, size, type, 1);
 	}
 
 	private void collision(){
@@ -28,8 +32,8 @@ public class PhysicEngine extends GameObject{
 				IntersectData data = objs.get(i).intersects(objs.get(j));
 				if(data.isIntersect()){
 					Vector3D direction = data.getDistance().normalized();
-					objs.get(i).setVelocity(objs.get(i).getVelocity().reflect(direction));
-					objs.get(j).setVelocity(objs.get(j).getVelocity().reflect(direction));
+					objs.get(i).collision(direction.normalized(),objs.get(j).getWeight());
+					objs.get(j).collision(direction.normalized(),objs.get(i).getWeight());
 				}
 			}
 		}

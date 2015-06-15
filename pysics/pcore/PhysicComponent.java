@@ -1,4 +1,7 @@
 package pcore;
+import java.util.ArrayList;
+
+import com.effect.Effect;
 import com.engine.obs.Colider;
 import com.engine.obs.IntersectData;
 import com.engine.rendering.objects.RenderingEngine;
@@ -11,12 +14,24 @@ public class PhysicComponent extends GameComponent{
 	private GameObject wrapped;
 	private Vector3D velocity;
 	private Colider intersects;
+	private int weight;
+	private ArrayList<Effect> effects;
 
-	public PhysicComponent(GameObject wrapped, Vector3D velocity, Vector3D size, int type) {
+	public PhysicComponent(GameObject wrapped, Vector3D velocity, Vector3D size, int type,int weight) {
 		super();
+		this.effects = new ArrayList<Effect>();
 		this.setWrapped(wrapped);
 		this.velocity = velocity;
 		this.intersects = Colider.createInstance(wrapped.getTransform().getPos(), size, type);
+		this.weight = weight;
+	}
+	
+	public void addEffect(Effect e){
+		effects.add(e);
+	}
+	
+	public void removeEffect(Effect e){
+		effects.remove(e);
 	}
 
 	public GameObject getWrapped() {
@@ -64,6 +79,20 @@ public class PhysicComponent extends GameComponent{
 	protected void finalize() throws Throwable {
 		super.finalize();
 		PhysicEngine.removeObject(this);
+	}
+
+	public void collision(Vector3D direction,int otherWeight) {
+		for(Effect effect: effects){
+			effect.collision(this, direction,otherWeight);
+		}
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 	
 
