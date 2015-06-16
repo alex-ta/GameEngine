@@ -93,7 +93,7 @@ public class TestGame extends Game
 		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
 		GameObject testMesh4 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
 		
-		physic.wrappObject(testMesh3, new Vector3D(-1f,0f,0f), new Vector3D(1f,1f,1f), Colider.SPHERE).addEffect(new Reflect());
+		physic.wrappObject(testMesh3, new Vector3D(-1f,0f,0f), new Vector3D(1f,1f,1f), Colider.SPHERE,5).addEffect(new Reflect());
 		physic.wrappObject(testMesh4, new Vector3D(1f,0f,0f), new Vector3D(1f,1f,1f), Colider.BOX,2).addEffect(new Reflect());
 
 		

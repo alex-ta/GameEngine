@@ -31,9 +31,10 @@ public class PhysicEngine extends GameObject{
 			for(int j = i+1; j< objs.size(); j++){
 				IntersectData data = objs.get(i).intersects(objs.get(j));
 				if(data.isIntersect()){
+					float joule = (objs.get(i).getVelocity().mul(objs.get(i).getWeight()).abs().add(objs.get(j).getVelocity().mul(objs.get(j).getWeight()).abs())).dot(0.5f);
 					Vector3D direction = data.getDistance().normalized();
-					objs.get(i).collision(direction.normalized(),objs.get(j).getWeight());
-					objs.get(j).collision(direction.normalized(),objs.get(i).getWeight());
+					objs.get(i).collision(direction.normalized(),joule,objs.get(j).getWeight());
+					objs.get(j).collision(direction.normalized(),joule,objs.get(i).getWeight());
 				}
 			}
 		}

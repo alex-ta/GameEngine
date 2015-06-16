@@ -81,9 +81,9 @@ public class PhysicComponent extends GameComponent{
 		PhysicEngine.removeObject(this);
 	}
 
-	public void collision(Vector3D direction,int otherWeight) {
+	public void collision(Vector3D direction,float joule,float weight) {
 		for(Effect effect: effects){
-			effect.collision(this, direction,otherWeight);
+			effect.collision(this, direction,joule,weight);
 		}
 	}
 

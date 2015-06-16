@@ -35,6 +35,10 @@ public class Vector3D
 			z = r.z;
 		return new Vector3D(x,y,z);
 	}
+	
+	public float dot(float r){
+		return x*r+y*r+z*r;
+	}
 
 	public float dot(Vector3D r)
 	{
