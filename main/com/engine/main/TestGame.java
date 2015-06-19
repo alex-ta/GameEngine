@@ -1,5 +1,8 @@
 package com.engine.main;
 import com.effect.Reflect;
+import com.effect.Backwards;
+import com.effect.SoftReflect;
+import com.effect.Throught;
 import com.engine.components.Camera;
 import com.engine.components.DirectionalLight;
 import com.engine.components.FreeLook;
@@ -19,6 +22,7 @@ import com.engine.scenegraph.GameObject;
 import com.math.Quaternion;
 import com.math.Vector2D;
 import com.math.Vector3D;
+
 import pcore.PhysicEngine;
 
 public class TestGame extends Game
@@ -93,14 +97,14 @@ public class TestGame extends Game
 		GameObject testMesh3 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
 		GameObject testMesh4 = new GameObject().addComponent(new MeshRenderer(tempMesh, material));
 		
-		physic.wrappObject(testMesh3, new Vector3D(-1f,0f,0f), new Vector3D(1f,1f,1f), Colider.SPHERE,5).addEffect(new Reflect());
+		physic.wrappObject(testMesh3, new Vector3D(-5f,0f,0f), new Vector3D(1f,1f,1f), Colider.BOX,25).addEffect(new Reflect());
 		physic.wrappObject(testMesh4, new Vector3D(1f,0f,0f), new Vector3D(1f,1f,1f), Colider.BOX,2).addEffect(new Reflect());
 
 		
 		// set POS does not update bounding
-		testMesh3.getTransform().setPos(new Vector3D(15,0,0));
+		testMesh3.getTransform().setPos(new Vector3D(55,0,0));
 		testMesh4.getTransform().setPos(new Vector3D(5,0,0));
-		
+		//testMesh3.getTransform().setScale(testMesh3.getTransform().getScale().mul(10));
 		
 		
 		testMesh1.getTransform().getPos().set(0, 2, 0);

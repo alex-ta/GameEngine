@@ -26,12 +26,14 @@ public class PhysicComponent extends GameComponent{
 		this.weight = weight;
 	}
 	
-	public void addEffect(Effect e){
+	public PhysicComponent addEffect(Effect e){
 		effects.add(e);
+		return this;
 	}
 	
-	public void removeEffect(Effect e){
+	public PhysicComponent removeEffect(Effect e){
 		effects.remove(e);
+		return this;
 	}
 
 	public GameObject getWrapped() {
@@ -81,9 +83,9 @@ public class PhysicComponent extends GameComponent{
 		PhysicEngine.removeObject(this);
 	}
 
-	public void collision(Vector3D direction,float joule,float weight) {
+	public void collision(Vector3D direction,float weight,float joule) {
 		for(Effect effect: effects){
-			effect.collision(this, direction,joule,weight);
+			effect.collision(this, direction,weight,joule);
 		}
 	}
 
@@ -93,6 +95,11 @@ public class PhysicComponent extends GameComponent{
 
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+
+	public void breakup() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

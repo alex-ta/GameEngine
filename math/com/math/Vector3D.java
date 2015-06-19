@@ -198,6 +198,6 @@ public class Vector3D
 	}
 
 	public Vector3D reflect(Vector3D normal) {
-		return this.sub(normal.mul(this.dot(normal) *2));
+		return normal.mul(-2 *(this.dot(normal))).add(this);
 	}
 }

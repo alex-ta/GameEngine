@@ -23,6 +23,8 @@ public class PhysicEngine extends GameObject{
 	}
 	
 	public PhysicComponent wrappObject(GameObject obj,Vector3D speed,Vector3D size,int type){
+		/**add Physic and scales Object*/
+		obj.getTransform().setScale(obj.getTransform().getScale().mul(size.mul(2)));
 		return this.wrappObject(obj, speed, size, type, 1);
 	}
 
@@ -31,10 +33,12 @@ public class PhysicEngine extends GameObject{
 			for(int j = i+1; j< objs.size(); j++){
 				IntersectData data = objs.get(i).intersects(objs.get(j));
 				if(data.isIntersect()){
-					float joule = (objs.get(i).getVelocity().mul(objs.get(i).getWeight()).abs().add(objs.get(j).getVelocity().mul(objs.get(j).getWeight()).abs())).dot(0.5f);
+					PhysicComponent obj1 = objs.get(i);
+					PhysicComponent obj2 = objs.get(j);
+					float joule = (obj1.getVelocity().mul(obj1.getWeight()).abs().add(obj2.getVelocity().mul(obj2.getWeight()).abs())).dot(0.1f);
 					Vector3D direction = data.getDistance().normalized();
-					objs.get(i).collision(direction.normalized(),joule,objs.get(j).getWeight());
-					objs.get(j).collision(direction.normalized(),joule,objs.get(i).getWeight());
+						obj1.collision(direction.normalized(),obj2.getWeight(),joule);
+						obj2.collision(direction.normalized(),obj1.getWeight(),joule);
 				}
 			}
 		}
